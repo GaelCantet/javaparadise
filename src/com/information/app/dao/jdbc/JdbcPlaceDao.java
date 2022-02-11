@@ -18,11 +18,12 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
     public Long createPlace(Place place) throws SQLException {
         Long id;
         // requête insertion
-        ResultSet resultSet = connection.createStatement().executeQuery("INSERT INTO place (name) VALUES ('"+place.getName()+"')");
+        connection.createStatement().executeUpdate("INSERT INTO place (name) VALUES ('"+place.getName()+"')");
         // id = id du dernier place inséré {MAX(id)}
-        // place.setId(id);
+        ResultSet resultSet = connection.createStatement().executeQuery("SELECT MAX(id) as 'id' from Place");
         while (resultSet.next()) {
             id = resultSet.getLong("id");
+            place.setId(id);
         }
         return place.getId();
     }

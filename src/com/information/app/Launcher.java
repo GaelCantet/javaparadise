@@ -10,8 +10,9 @@ public class Launcher {
     public static void main(String[] args) throws SQLException {
         System.out.println("1 - Add a place");
         Scanner scanner = new Scanner(System.in);
-        int choix = scanner.nextInt();
-        if(choix == 1){
+        int choice = scanner.nextInt();
+        if(choice == 1){
+            System.out.print("Name : ");
             String name = scanner.next();
             Long id = new JdbcPlaceDao().createPlace(new Place(name));
             System.out.println("id = "+id);
