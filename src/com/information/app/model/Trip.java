@@ -2,13 +2,13 @@ package com.information.app.model;
 
 public class Trip {
     private long id;
-    private String departure;
-    private String arrival;
+    private Place departure;
+    private Place arrival;
     private float price;
 
     public Trip(Place departure, Place arrival, float price) {
-        this.departure = departure.getName();
-        this.arrival = arrival.getName();
+        this.departure = departure;
+        this.arrival = arrival;
         this.price = price;
     }
 
@@ -16,11 +16,11 @@ public class Trip {
         return id;
     }
 
-    public String getDeparture() {
+    public Place getDeparture() {
         return departure;
     }
 
-    public String getArrival() {
+    public Place getArrival() {
         return arrival;
     }
 
@@ -29,11 +29,11 @@ public class Trip {
     }
 
     public void setDeparture(Place departure) {
-        this.departure = departure.getName();
+        this.departure = departure;
     }
 
     public void setArrival(Place arrival) {
-        this.arrival = arrival.getName();
+        this.arrival = arrival;
     }
 
     public void setPrice(float price) {
