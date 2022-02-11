@@ -8,6 +8,11 @@ public class Place {
         this.name = name;
     }
 
+    public Place(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

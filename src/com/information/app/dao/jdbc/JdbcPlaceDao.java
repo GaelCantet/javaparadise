@@ -29,13 +29,19 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
     }
 
     @Override
-    public Place findPlaceById(Long id) {
-        return null;
+    public Place findPlaceById(Long id) throws SQLException {
+        ResultSet resultSet = connection.createStatement().executeQuery("SELECT name from place WHERE id=" + id + "");
+        String name = null;
+        while (resultSet.next()) {
+            name = resultSet.getString("name");
+        }
+        return new Place(id, name);
     }
 
     @Override
-    public boolean updatePlace(Place place) {
-        return false;
+    public boolean updatePlace(Place place) throws SQLException {
+        boolean success = connection.createStatement().execute("UPDATE place SET name = '"+place.getName()+"' WHERE id="+place.getId()+"");
+        return success;
     }
 
     @Override
