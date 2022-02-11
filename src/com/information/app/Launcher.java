@@ -29,10 +29,25 @@ public class Launcher {
                 String name = scanner.next();
                 Long id = new JdbcPlaceDao().createPlace(new Place(name));
                 System.out.println("Place added with the ID = "+id+"\n");
+
             }else if(choice == 2){
                 // find place
+                System.out.print("ID : ");
+                Long id = scanner.nextLong();
+                Place place = new JdbcPlaceDao().findPlaceById(id);
+                System.out.println("Place with id : "+id+" is "+place.getName()+"\n");
+
             }else if(choice == 3){
                 // edit place
+                System.out.print("ID : ");
+                Long id = scanner.nextLong();
+                String name = new JdbcPlaceDao().findPlaceById(id).getName();
+                System.out.println("Original name : "+name);
+                System.out.print("New name : ");
+                String newName = scanner.next();
+                boolean success = new JdbcPlaceDao().updatePlace(new Place(id, newName));
+                System.out.println("name : "+name+" -> "+newName+" for id = "+id+"\n");
+
             }else if(choice == 4){
                 // remove place
             }else if(choice == 5){
