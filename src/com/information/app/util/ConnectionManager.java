@@ -16,7 +16,7 @@ public class ConnectionManager {
         return connectionManager;
     }
 
-    private static Connection getConnection() {
+    public static Connection getConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
         } catch (SQLException e) {
@@ -25,7 +25,7 @@ public class ConnectionManager {
         return connection;
     }
 
-    private static void close() {
+    public static void close() {
         try {
             connection.close();
         } catch (SQLException e) {
