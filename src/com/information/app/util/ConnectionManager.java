@@ -7,6 +7,14 @@ public class ConnectionManager {
     static final String USER = "root";
     static final String PWD = "";
     static Connection connection = null;
+    private static ConnectionManager connectionManager = null;
+
+    public static ConnectionManager getInstance() {
+        if (connectionManager == null) {
+            connectionManager = new ConnectionManager();
+        }
+        return connectionManager;
+    }
 
     private static Connection getConnection() {
         try {
