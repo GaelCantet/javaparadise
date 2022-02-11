@@ -25,6 +25,7 @@ public class Launcher {
             int choice = scanner.nextInt();
 
             if(choice == 1){
+                // add place
                 System.out.print("Name : ");
                 String name = scanner.next();
                 Long id = new JdbcPlaceDao().createPlace(new Place(name));
@@ -46,10 +47,16 @@ public class Launcher {
                 System.out.print("New name : ");
                 String newName = scanner.next();
                 boolean success = new JdbcPlaceDao().updatePlace(new Place(id, newName));
-                System.out.println("name : "+name+" -> "+newName+" for id = "+id+"\n");
+                if (success){
+                    System.out.println("name : "+name+" -> "+newName+" for id = "+id+"\n");
+                }else{
+                    System.out.println("erreur d'update\n");
+                }
 
             }else if(choice == 4){
                 // remove place
+
+
             }else if(choice == 5){
                 // add trip
             }else if(choice == 6){
@@ -63,6 +70,5 @@ public class Launcher {
                 System.out.println("erreur saisie");
             }
         }
-
     }
 }

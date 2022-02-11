@@ -40,8 +40,12 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
 
     @Override
     public boolean updatePlace(Place place) throws SQLException {
-        boolean success = connection.createStatement().execute("UPDATE place SET name = '"+place.getName()+"' WHERE id="+place.getId()+"");
-        return success;
+        try{
+            connection.createStatement().execute("UPDATE place SET name = '"+place.getName()+"' WHERE id="+place.getId()+"");
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
     }
 
     @Override
