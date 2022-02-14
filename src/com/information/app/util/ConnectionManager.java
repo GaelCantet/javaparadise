@@ -3,7 +3,7 @@ package com.information.app.util;
 import java.sql.*;
 
 public class ConnectionManager {
-    static final String URL = "jdbc:mysql://localhost:3306/javaparadise?";
+    static final String URL = "jdbc:mysql://localhost:3308/javaparadise?";
     static final String USER = "root";
     static final String PWD = "";
     static Connection connection = null;
