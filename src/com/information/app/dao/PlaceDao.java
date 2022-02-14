@@ -10,5 +10,5 @@ public interface PlaceDao {
     public Place findPlaceById(Long id) throws SQLException; //retournera une Place
     public boolean updatePlace(Place place) throws SQLException; //retourne un booléen
     public boolean removePlace(Place place); //retournera un booléen
-    public List<Place> findAllPlace(); //retournera une liste de Place
+    public List<Place> findAllPlace() throws SQLException; //retournera une liste de Place
 }

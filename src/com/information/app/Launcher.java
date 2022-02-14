@@ -57,7 +57,22 @@ public class Launcher {
                 }
 
             }else if(choice == 4){
-                // remove place
+                // remove
+                System.out.print("ID : ");
+                Long id = scanner.nextLong();
+                Place place = new JdbcPlaceDao().findPlaceById(id);
+                System.out.println("Place : "+place.getName());
+                System.out.println("All trips with this Place will be removed with it.\nAre you sure you want to remove it ? [yes/no]");
+                if (scanner.next().equals("yes")) {
+                    boolean success = new JdbcPlaceDao().removePlace(place);
+                    if (success){
+                        System.out.println("Place removed !\n");
+                    }else{
+                        System.out.println("erreur d'update\n");
+                    }
+                } else {
+                    System.out.println("Deletion cancelled\n");
+                }
 
 
             }else if(choice == 5){
@@ -73,7 +88,7 @@ public class Launcher {
                 System.out.println("Price : ");
                 float price = scanner.nextFloat();
                 long id = new JdbcTripDao().createTrip(new Trip(0, departure, arrival, price));
-                System.out.println("Trip added with id : "+id);
+                System.out.println("Trip added with id : "+id+"\n");
             }else if(choice == 6){
                 // find trip
                 System.out.println("Trip ID : ");
@@ -82,7 +97,7 @@ public class Launcher {
                 System.out.println("Trip ID : " + trip.getId());
                 System.out.println("Trip departure : " + trip.getDeparture().getName());
                 System.out.println("Trip arrival : " + trip.getArrival().getName());
-                System.out.println("Trip price : " + trip.getPrice());
+                System.out.println("Trip price : " + trip.getPrice()+"\n");
             }else if(choice == 7){
                 // remove trip
                 System.out.println("Trip ID : ");
@@ -92,15 +107,15 @@ public class Launcher {
                 System.out.println("Are you sure tou want to delete this trip ? [yes/no]");
                 if (scanner.next().equals("yes")) {
                     new JdbcTripDao().removeTrip(trip);
-                    System.out.println("Trip succesfully deleted");
+                    System.out.println("Trip succesfully deleted\n");
                 } else {
-                    System.out.println("Deletion cancelled");
+                    System.out.println("Deletion cancelled\n");
                 }
             }else if(choice == 8){
                 // quit
                 start = false;
             }else{
-                System.out.println("erreur saisie");
+                System.out.println("erreur saisie\n");
             }
         }
     }

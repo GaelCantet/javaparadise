@@ -6,6 +6,7 @@ import com.information.app.model.Place;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
@@ -39,7 +40,7 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
     }
 
     @Override
-    public boolean updatePlace(Place place) throws SQLException {
+    public boolean updatePlace(Place place) {
         try{
             connection.createStatement().execute("UPDATE place SET name = '"+place.getName()+"' WHERE id="+place.getId()+"");
             return true;
@@ -50,11 +51,29 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao {
 
     @Override
     public boolean removePlace(Place place) {
-        return false;
+        try{
+            connection.createStatement().execute("DELETE FROM trip\n" +
+                    "WHERE departure = "+place.getId()+"\n" +
+                    "OR arrival = "+place.getId()+"");
+            connection.createStatement().execute("DELETE FROM place\n" +
+                    "WHERE id = "+place.getId()+"");
+            return true;
+        }catch(SQLException e){
+            return false;
+        }
     }
 
     @Override
-    public List<Place> findAllPlace() {
-        return null;
+    public List<Place> findAllPlace() throws SQLException {
+        List<Place> places = new ArrayList<>();
+        ResultSet resultSet = connection.createStatement().executeQuery("SELECT id, name from place");
+        Long id = null;
+        String name = null;
+        while (resultSet.next()) {
+            id = resultSet.getLong("id");
+            name = resultSet.getString("name");
+            places.add(new Place(id, name));
+        }
+        return places;
     }
 }
