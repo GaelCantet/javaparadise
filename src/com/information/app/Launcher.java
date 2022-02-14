@@ -4,9 +4,9 @@ import com.information.app.dao.jdbc.JdbcPlaceDao;
 import com.information.app.dao.jdbc.JdbcTripDao;
 import com.information.app.model.Place;
 import com.information.app.model.Trip;
+import com.information.app.util.ConnectionManager;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Launcher {
@@ -114,6 +114,8 @@ public class Launcher {
             }else if(choice == 8){
                 // quit
                 start = false;
+                scanner.close();
+                ConnectionManager.close();
             }else{
                 System.out.println("erreur saisie\n");
             }
